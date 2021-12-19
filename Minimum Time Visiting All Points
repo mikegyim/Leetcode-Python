@@ -1,0 +1,33 @@
+On a plane there are n points with integer 
+coordinates points[i] = [xi, yi]. 
+Your task is to find the minimum time in 
+seconds to visit all points.
+
+You can move according to the next rules:
+
+In one second always you can either move vertically, 
+horizontally by one unit or diagonally 
+(it means to move one unit vertically and 
+one unit horizontally in one second).
+You have to visit the points in the same
+order as they appear in the array.
+
+solution 1
+class Solution:
+    def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
+        steps = 0
+        for i in range(len(points)-1):
+            first_point = points[i]
+            next_point = points[i+1]
+            steps += max(abs(next_point[0]-first_point[0]), abs(next_point[1]-first_point[1]))
+        return steps
+            
+        solution 2
+class Solution:
+    def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
+        sum = 0
+        for i in range(len(points) -1):
+            sum += max([abs(x-y) for x , y in zip(points[i], points[i+1])])
+        return sum
+        
+Share this:
