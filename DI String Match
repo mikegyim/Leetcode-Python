@@ -1,0 +1,62 @@
+QUESTION COPYRIGHT (C) LEETCODE
+
+Given a string 
+S
+ that only contains "I" (increase) or "D" (decrease), let 
+N = S.length
+.
+ Return any permutation 
+A
+ of 
+[0, 1, ..., N]
+ 
+such that for all 
+i = 0, ..., N-1
+:
+ If 
+S[i] == "I"
+, then 
+A[i] < A[i+1]
+
+ If 
+S[i] == "D"
+, then 
+A[i] > A[i+1]
+ 
+  
+ Example 1:
+ Input: "IDID" Output: [0,4,1,3,2] 
+ Example 2:
+ Input: "III" Output: [0,1,2,3] 
+ Example 3:
+ Input: "DDI" Output: [3,2,0,1] 
+  
+ Note:
+ 
+1 <= S.length <= 10000
+
+
+solution
+Time complexity is O(N) and space complexity is O(N)
+Using ad-hoc
+NB: The length of output array differs by
+ 1 compared to the length of the given
+ input String S since
+ the array A always 
+
+starts with 0 
+and thats the reason for + [low] in the return.
+example Input: "IDID" Output: [0,4,1,3,2]
+ has 4 inputs but output is 5
+class Solution:
+     def diStringMatch(self, S: str) -> List[int]:
+         low, high = 0, len(S)
+         result = []
+         for c in S:
+             if c == 'I':
+                 result.append(low)
+                 low += 1
+             else:
+                 result.append(high)
+                 high -= 1
+         return result + [low]
