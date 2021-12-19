@@ -1,0 +1,85 @@
+QUESTION COPYRIGHT (C) LEETCODE
+ 
+You're given strings J representing the 
+types of stones that are jewels, and 
+S representing the stones you have. 
+ Each character in S is a type of stone you have. 
+ You want to know how many of the
+ stones you have are also jewels.
+ 
+The letters in J are guaranteed distinct, 
+and all characters in J and S are letters.
+ Letters are case sensitive, 
+so "a" is considered a different type of stone from "A".
+ 
+Example 1:
+ 
+Input: J = "aA", S = "aAAbbbb"
+Output: 3
+ 
+Example 2:
+ 
+Input: J = "z", S = "ZZ"
+Output: 0
+ 
+Note:
+ 
+    S and J will consist of letters and have length at most 50.
+    The characters in J are distinct.
+solution 1
+Brute force
+ 
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        return sum(x in J for x in S)
+        
+ 
+ 
+ 
+Time Complexity: O(J.length∗S.length))
+space complexity: O(1)
+ 
+solution2
+Hash Set
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        Jset = set(J)
+        return sum(x in Jset for x in S)
+Time complexity = O(J.length∗S.length))
+space complexity = O(J.length).
+ 
+solution3
+ 
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+         
+        count = 0
+        for i in S:
+            if i in J:
+                count += 1
+        return count
+ 
+solution 2
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        result = 0
+        for i in S:
+            for j in J:
+                if j == i:
+                    result +=1
+        return result
+ 
+solution 3
+ 
+class Solution:
+    def numJewelsInStones(self, J: str, S: str) -> int:
+        result = 0
+        for i in range(len(S)):
+            for j in range(len(J)):
+                if S[i] == J[j]:
+                    result += 1
+        return result
+            
+             
+         
+                     
