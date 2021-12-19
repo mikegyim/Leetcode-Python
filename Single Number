@@ -1,0 +1,84 @@
+"""
+Given a non-empty array of integers nums,
+ every element appears twice except for one.
+ Find that single one.
+ 
+Follow up: Could you implement a solution 
+with a linear runtime complexity and 
+without using extra memory?
+"""
+RELATED QUESTIONS: single number iii, single number, 
+find the duplicate number,
+ find the difference, missing number
+ 
+solution 1
+"""
+my Personal note for bit manipulationXOR:
+True XOR True = False
+False XOR False = False
+False XOR True = True
+True XOR False = True
+ 
+EXAMPLE
+output = 8 ^ 4 ^ 6 ^ 5 ^ 6 ^ 4 ^ 5
+ 
+Since XOR is associative and commutative, above
+expression can be written as:
+res = 8 ^ (4 ^ 4) ^ (5 ^ 5) ^ (6 ^ 6)
+= 8 ^ 0 ^ 0 ^ 0
+= 8 ^ 0
+= 8
+"""
+ Time Complexity 0(n) and space complexity is O(1)       
+    class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+ 
+         
+        # So for this question
+        #Using Bit Manipulation XOR
+        # c ^ 0 = c
+        # c ^ c = 0
+        # c ^ d ^ c= c^c^d = 0^d = d
+         
+        c = 0
+        for i in nums:
+            c  = c ^ i   #  c ^= i
+        return c
+             
+           
+    solution 2
+using maths. We know that 2∗(d+e+f)−(d+d+e+e+f)=f
+time complexity = O(N) and space complexity = O(N)
+ 
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        return 2* sum(set(nums)) - sum(nums)  
+ 
+solution 3
+Using Dictionary. Time Complexity 0(N) and space Complexity O(N)
+from collections import defaultdict
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        Dict = defaultdict(int)
+        for num in nums:
+            Dict[num] += 1
+        for num in Dict:
+            if Dict[num] == 1:
+                return num
+ 
+solution 4
+Using List operation, then append and remove
+Time Complexity is O(N^2) because the iteration is O(N) 
+and search through the list to find whether 
+there is a duplicate is also O(N). Sine the search is within the for loop, we multiple two of the O(N)'s which is O(N^2)
+Space Complexity: O(N)
+ 
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        non_duplicate = []
+        for num in nums:
+            if num not in non_duplicate:
+                non_duplicate.append(num)
+            else:
+                non_duplicate.remove(num)
+        return non_duplicate.pop()
