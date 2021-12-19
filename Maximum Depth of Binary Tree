@@ -1,0 +1,71 @@
+copyright (c) leetcode
+Given a binary tree, find its maximum depth.
+ 
+The maximum depth is the number of 
+nodes along the longest path from the 
+root node down to the farthest leaf node.
+ 
+Note: A leaf is a node with no children.
+ 
+Example:
+ 
+Given binary tree [3,9,20,null,null,15,7],
+ 
+    3
+   / \
+  9  20
+    /  \
+   15   7
+ 
+return its depth = 3.
+ 
+related questions: 
+Minimum Depth of Binary Tree
+Maximum Depth of N-ary Tree
+ 
+solution 1
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+ 
+DFS recursion, time complexity O(n)
+ and space complexity O(N) for worst 
+case and O(logN) for best case. 
+Therefore, space complexity is O(logN)
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if root is None: return 0
+        else:
+            leftHeight = self.maxDepth(root.left)
+            rightHeight = self.maxDepth(root.right)
+            return max(leftHeight, rightHeight) + 1
+         
+ 
+solution 2 
+# also using stack and dfs
+ time complexity O(n) and space complexity 
+O(N) for worst case and O(logN) for average case. 
+Therefore, space complexity is O(logN)
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        stack = []
+        if  root is not None: stack.append((1, root))
+        depth = 0
+        while stack != []:
+            curr_depth, root = stack.pop()
+            if root is not None:
+                depth = max(depth, curr_depth)
+                stack.append((curr_depth +1, root.left))
+                stack.append((curr_depth + 1, root.right))
+        return depth
+         
+        
