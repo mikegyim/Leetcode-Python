@@ -1,0 +1,56 @@
+question copyright (c) leetcode
+
+Given a string S, remove the vowels 'a', 'e', 'i', 'o', and 'u' from it, and return the new string.
+
+ 
+
+Example 1:
+
+Input: "leetcodeisacommunityforcoders"
+Output: "ltcdscmmntyfrcdrs"
+
+Example 2:
+
+Input: "aeiou"
+Output: ""
+
+ 
+
+Note:
+
+    S consists of lowercase English letters only.
+    1 <= S.length <= 1000
+
+
+solution 1
+class Solution:
+     def removeVowels(self, S: str) -> str:
+         for letter in S:
+             if letter in 'aeiou':
+                 S = S.replace(letter, '')
+         return S
+
+solution 2
+class Solution:
+    def removeVowels(self, S: str) -> str:
+        ans = []
+        for i in range(len(S)):
+            if S[i] not in 'aeiou':
+                ans.append(S[i])
+        return ''.join(ans)
+
+solution 3
+class Solution:
+     def removeVowels(self, S: str) -> str:
+         return "".join(x for x in S if x not in ('a', 'e', 'i', 'o', 'u'))
+
+
+solution 4
+class Solution:
+    def removeVowels(self, S: str) -> str:
+        vowels = ['a', 'e', 'i', 'o', 'u']
+        for letter in vowels:
+            S= S.replace(letter,'')
+        return S
+        
+            
