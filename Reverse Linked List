@@ -1,0 +1,103 @@
+###
+QUESTION COPYRIGHT (C) LEETCODE
+Reverse a singly linked list.
+ 
+Example:
+ 
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+ 
+Follow up:
+ 
+A linked list can be reversed either iteratively or recursively. Could you implement both?
+ 
+solution 1:
+Time complexity = O(N)
+space = O(1)
+iterative
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        preNode = None
+        while head:
+            nextNode = head.next
+            head.next = preNode
+            preNode = head
+            head = nextNode
+        return preNode
+             
+         
+         
+ 
+solution 2:
+iterative approach
+Time complexity O(N)
+space complexity O(1)
+###
+ 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        #since we have not move yet, there is no previous
+        previous  = None 
+        #initially, current is all elements
+        #That is, the head
+        #Always, current holds elements to be reversed
+        current = head
+        while current:
+            next_distance = current.next
+            #next current will become previous
+            current.next = previous # where reversed occurs
+            #copy current reversed list into previous 
+            #previous always hold reversed previous linked list
+            previous = current
+            current = next_distance
+        return previous
+      
+ solution 2
+ 
+#dummy(also called sentinel) is used to avoid
+#having to check for empty lists
+using straight forward approach
+Time complexity O(N)
+space O(1)
+ 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        dummy = ListNode(0)
+        while head:
+            dummy.next, head.next, head = head, dummy.next, head.next
+        return dummy.next       
+         
+         
+ 
+     solution 3
+     recursion
+  # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head:ListNode, prev= None)->ListNode:
+         
+        if not head: 
+            return prev
+        next = head.next
+        head.next = prev
+        return self.reverseList(next, head)
+         
+         
