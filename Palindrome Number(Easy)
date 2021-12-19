@@ -1,0 +1,68 @@
+'''
+Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
+
+Example 1:
+
+Input: 121
+Output: true
+
+Example 2:
+
+Input: -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+
+Example 3:
+
+Input: 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+
+'''
+class Solution:
+Approach: convert the 2nd half of the integer
+and compare with first half
+Time complexity O(logN)
+space complexity = O(1)
+
+#edges cases:
+#If x < 0: x is not palindrome.
+#Also if the last digit of the number is 0,
+#in order for it to be a palindrome:
+#the 1st digit of the number also needs to be 0
+# x = x// 10 Remove the least significant digit of x
+
+So, my method, I read the number backwards
+and checks if the numbers are equal 
+class Solution:
+     def isPalindrome(self, x: int) -> bool:
+         orig = x
+         back_x = 0
+         while x > 0:
+             back_x = (back_x *10) + (x%10)
+             x = x //10
+         return orig == back_x
+
+2)
+solution stack method:
+class Solution:
+     def isPalindrome(self, x: int) -> bool:
+         if x < 0:
+             return False
+         List = []
+         while x:
+             List.append(x%10)
+             x = x//10
+         return List == List[::-1]
+
+
+3)
+one liner solution
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        return str(x)==str(x)[::-1]
+        
