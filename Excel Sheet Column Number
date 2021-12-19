@@ -1,0 +1,35 @@
+"""
+QUESTION COPYRIGHT (C) LEETCODE
+
+Given a column title as appear in 
+an Excel sheet, return its
+ corresponding column number.
+ For example:
+     A -> 1    
+ B -> 2    
+ C -> 3     ...    
+ Z -> 26    
+ AA -> 27    
+ AB -> 28      ... 
+ Example 1:
+ Input: "A" Output: 1 
+ Example 2:
+ Input: "AB" Output: 28 
+ Example 3:
+ Input: "ZY" Output: 701 
+"""
+
+#convert a character to its ASCII value
+#subtract ASCII value of character 'A' from that value
+#This gives result from 0(for A) to 25(for Z)
+#You can add 1 to the result since we are
+#indexing from zero
+
+Time Complexity O(N)
+space Complexity O(1)
+class Solution:
+     def titleToNumber(self, s: str) -> int:
+         output = 0
+         for x in s:
+             output = output * 26 + ord(x)-ord('A') + 1
+         return output
