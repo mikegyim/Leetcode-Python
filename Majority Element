@@ -1,0 +1,68 @@
+"""
+QUESTION COPYRIGHT (C) LEETCODE
+ 
+Given an array of size n, find the majority element. 
+The majority element is the element
+ that appears more than ⌊ n/2 ⌋ times.
+ 
+You may assume that the array is non-empty 
+and the majority element always exist in the array.
+ 
+Example 1:
+ 
+Input: [3,2,3]
+Output: 3
+ 
+Example 2:
+ 
+Input: [2,2,1,1,1,2,2]
+Output: 2
+"""
+solution 1
+using sorting 
+Time complexity O(NlogN) and space complexity is O(1) or O(N). 
+It is O(1) because we sorted num in place but if
+it is not allowed, linear additional space on copy of nums is needed.
+ 
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        nums.sort()
+        return nums[len(nums)//2]
+         
+solution 2
+using Boyer-Moore Voting Algorithm
+This is done by counting instances of the majority element as +1 and instances of any other element as -1
+Time Complexity O(N)
+space complexity O(1)
+class Solution:
+    def majorityElement(self, nums: List[int])->int:
+        myCount = 0
+        candidate = None
+        for num in nums:
+        #when the count starts at 0, the element you encounter is a candidate
+        #contesting for majority element
+            if myCount == 0:
+                candidate = num
+            #if num is part of major element, we increase it counts by one 
+            #ottherwise, decrease it counts by one
+            myCount += (1 if candidate==num else -1)
+        return candidate
+                 
+                         
+ 
+solution 3
+ 
+Using hashmap
+Time Complexity O(N)
+space Complexity O(N)
+class Solution:
+    def majorityElement(self,nums: List[int])-> int:
+        myCount = collections.Counter(nums)
+        return max(myCount.keys(), key = myCount.get)
+     
+solution 4
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        return sorted(nums)[len(nums)//2]
+ 
+ 
