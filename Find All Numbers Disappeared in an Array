@@ -1,0 +1,81 @@
+"""
+QUESTION COPYRIGHT (C) LEETCODE
+Given an array of integers 
+where 1 ≤ a[i] ≤ n (n = size of array),
+ some elements appear twice and others appear once.
+ 
+Find all the elements of [1, n] 
+inclusive that do not appear in this array.
+ 
+Could you do it without extra space 
+and in O(n) runtime? You may assume 
+the returned list does not count as extra space.
+ 
+Example:
+ 
+Input:
+[4,3,2,7,8,2,3,1]
+ 
+Output:
+[5,6]
+ 
+"""
+Algorithm: 
+using inplace Modification
+Time complexity O(N)
+space complexity O(1) : Since the input array 
+are reused as a hash table and the space
+ occupied by the output array doesn't count
+toward the space complexity
+  
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        for n in nums:
+            #this value is treated as the new index
+            a = abs(n) - 1
+            #check the magnitude of value at this new index
+            # if the magnitude is positive, make it negative
+            #thus indicating that the num[i] has
+            #appeared or has been visited
+            if nums[a]> 0: nums[a] *= -1
+        #this is the array that will contain missing nunbers
+        result  = []
+        # Iterate over the numbers from 1 to N
+        #append all those
+        # that have positive magnitude in the array
+        #meaning those that have not been visited
+        for i in range(1,len(nums) +1) :
+            if nums[i-1] > 0:
+                result.append(i)
+        return result
+          
+             
+ 
+         
+         
+ 
+USING HASHTABLE
+Time complexity is O(N)
+space complexity is O(N)
+ 
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        #hashtable to keep track of the numbers
+        myDict = {}
+        #add each number to the hashtable
+        for num in nums:
+            myDict[num] = 1
+        #result to contain the missing numbers
+        result = []
+        for num in range(1, len(nums) +1):
+            if num not in myDict:
+                result.append(num)
+        return result
+   
+Time complexity O(N), space O(N)
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        N = set(nums)
+        return [i for i in range(1, len(nums)+1) if i not in N]
+ 
+              
