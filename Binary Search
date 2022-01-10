@@ -1,0 +1,73 @@
+"""
+QUESTION COPYRIGHT (C) LEETCODE
+Given a sorted (in ascending order)
+ integer array nums of n elements 
+and a target value, write a function 
+to search target in nums. If target exists, 
+then return its index, otherwise return -1.
+ 
+ 
+Example 1:
+ 
+Input: nums = [-1,0,3,5,9,12], target = 9
+Output: 4
+Explanation: 9 exists in nums and its index is 4
+ 
+Example 2:
+ 
+Input: nums = [-1,0,3,5,9,12], target = 2
+Output: -1
+Explanation: 2 does not exist in nums so return -1
+ 
+  
+ 
+Note:
+ 
+    You may assume that all elements in nums are unique.
+    n will be in the range [1, 10000].
+    The value of each element in nums will be in the range [-9999, 9999].
+ 
+ 
+"""
+ 
+using binary search
+Time complexity O(logN)
+space complexity O(1) since its a constant space solution
+solution
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left = 0
+        right = len(nums) -1
+        while left <= right:
+            pivot_point = left + (right-left)//2
+            if nums[pivot_point] == target: return pivot_point
+            # pivot_point is less than target
+            #it's on the left and we increase it
+            elif nums[pivot_point] < target:
+                left = pivot_point + 1
+            else:
+                right = pivot_point - 1
+        return -1
+         
+ 
+other ways of solving it
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        for num in nums:
+            if num == target:
+                return nums.index(num)
+        return -1
+         
+         
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        return nums.index(target) if target in nums else -1
+ 
+ 
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        if target not in nums:
+            return -1
+        else:
+            return nums.index(target)
+        
