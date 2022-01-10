@@ -1,0 +1,100 @@
+"""
+QUESTION COPYRIGHT (C) LEETCODE
+ 
+Given a singly linked list,
+ determine if it is a palindrome.
+ 
+Example 1:
+ 
+Input: 1->2
+Output: false
+ 
+Example 2:
+ 
+Input: 1->2->2->1
+Output: true
+ 
+Follow up:
+Could you do it in O(n) time and O(1) space?
+ 
+ 
+"""
+Because it is a linked list, 
+the approach to use is 2 pointer(fast and slow)
+Time complexity O(N)
+space Complexity O(1)
+ 
+#The midpoint of the linked list is found 
+#using a slow pointer
+# The 2nd half of the lined list is reversed
+#That is, everything after the current position 
+#of the slow pointer is reversed
+#check if the values match up with the 
+#actual linked list by going through the 
+#reversed 2nd part of the linked list
+#And if they do, it is a palindrome.
+#If they dont, it is not a palindrome
+ 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reversed(self, head: ListNode) -> ListNode:
+        dummyhead = ListNode(0)
+        while head:
+            dummyhead.next, head.next, head = head, dummyhead.next, head.next
+        return dummyhead.next
+         
+    def isPalindrome(self, head: ListNode) -> bool:
+        fast = slow = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        fast = head
+        slow = self.reversed(slow)
+        while slow:
+            if slow.val != fast.val:
+                return False
+            slow = slow.next
+            fast = fast.next
+        else:
+            return True
+         
+OR
+ 
+ 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverse(self, head: ListNode) -> ListNode:
+        preNode = None
+        while head:
+            nextNode = head.next
+            head.next = preNode
+            preNode = head
+            head = nextNode
+        return preNode
+         
+     
+    def isPalindrome(self, head: ListNode) -> bool:
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+             
+        fast = head
+        slow = self.reverse(slow)
+        while slow:
+            if slow.val != fast.val:
+                return False
+            fast = fast.next
+            slow = slow.next
+        return True
+             
+     
+ 
