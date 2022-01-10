@@ -1,0 +1,65 @@
+"""
+QUESTION COPYRIGHT (C) LEETCODE
+Remove all elements from a linked list
+ of integers that have value val.
+ 
+Example:
+ 
+Input:  1->2->6->3->4->5->6, val = 6
+Output: 1->2->3->4->5
+"""
+using dummyhead Node
+Time complexity = O(N)
+space complexity = O(1)
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        dummyhead = ListNode(0)
+        dummyhead.next = head
+        curr = head
+        prev = dummyhead
+        #Set two pointers to track the current
+        #node and its predecessor: curr and prev
+        while curr:
+            #if the values are equal, delete the curr node
+            #i.e prev.next = curr.next
+            if curr.val == val:
+                prev.next = curr.next
+            #else, set the predecessor to be
+            #equal to the current node
+            else:
+                prev = curr
+            curr = curr.next
+        return dummyhead.next
+             
+ 
+ 
+Using recursive approach
+ 
+#Avoid the node which has the value equal to
+#the target value
+#When you reach the node with value equal to target,
+#skip it and return the next node in the target
+#python garbage collector  will remove the target element
+#so we don't really need to delete the target node 
+#since all the references to the target node are removed
+# Definition for singly-linked list.
+ 
+related questions Delete Node in a Linked List , Remove Element
+ 
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        if head == None:
+            return None
+        head.next = self.removeElements(head.next, val)
+        if head.val == val:
+            head = head.next
+        return head
