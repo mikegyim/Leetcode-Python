@@ -1,0 +1,100 @@
+"""
+QUESTION COPYRIGHT (C) LEETCODE
+Given a list of sorted characters 
+letters containing only lowercase letters, 
+and given a target letter target,
+ find the smallest element in the 
+list that is larger than the given target.
+ 
+Letters also wrap around. For example, 
+if the target is target = 'z' and 
+letters = ['a', 'b'], the answer is 'a'.
+ 
+Examples:
+ 
+Input:
+letters = ["c", "f", "j"]
+target = "a"
+Output: "c"
+ 
+Input:
+letters = ["c", "f", "j"]
+target = "c"
+Output: "f"
+ 
+Input:
+letters = ["c", "f", "j"]
+target = "d"
+Output: "f"
+ 
+Input:
+letters = ["c", "f", "j"]
+target = "g"
+Output: "j"
+ 
+Input:
+letters = ["c", "f", "j"]
+target = "j"
+Output: "c"
+ 
+Input:
+letters = ["c", "f", "j"]
+target = "k"
+Output: "c"
+ 
+Note:
+ 
+    letters has a length in range [2, 10000].
+    letters consists of lowercase letters, 
+and contains at least 2 unique letters.
+    target is a lowercase letter.
+"""
+solution 1
+using binary search
+Time complexity O(logN)
+space complexity O(1)
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        n = len(letters)
+        low = 0
+        high = n -1
+        #From the question, we know that target is
+        #outside the bounds of letters
+        #Since the array is circular, the next greatest value 
+        #must be the first value in the array
+        #We can execute our normal modified binary search
+        #if the value is within the bounds of the array 
+        if target < letters[low] or target >= letters[high]:
+            return letters[low]
+        while low <= high:
+            pivot = (low + high)//2
+            candidate = letters[pivot]
+            if target < candidate:
+                high = pivot -1
+            #Since the smallest value that's greater
+            #than the target is what we are looking for,
+            #we can combine target == letters[pivot]
+            # and target > letters[pivot]
+            if target >= candidate:
+                low = pivot + 1
+        return letters[low]
+                 
+ 
+USING LINEAR SCAN APPROACH  
+idea credit to leetcode
+#scan through since letters are sorted
+#if you see something larger while
+#scanning from left to right,
+#it must be the answer
+#else, the answer is letter[0] since
+#letters is non-empyt
+Time Complexiy O(N)
+space complexity O(1)
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        for l in letters:
+            if  l > target:
+                return l
+        return letters[0]
+ 
+                
