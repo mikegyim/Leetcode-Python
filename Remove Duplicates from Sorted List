@@ -1,0 +1,41 @@
+"""
+QUESTION COPYRIGHT (C) LEETCODE
+ 
+Given a sorted linked list, delete all duplicates such that each element appear only once.
+ 
+Example 1:
+ 
+Input: 1->1->2
+Output: 1->2
+ 
+Example 2:
+ 
+Input: 1->1->2->3->3
+Output: 1->2->3
+"""
+Using straight forward method
+Time complexity O(N) and space complexity O(1)
+ 
+#Traverse Through the list
+#remove all successive nodes with the same
+#value as the current node
+ 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        #Travsere through the list
+        #remove all nodes that have the same value as 
+        #the current node
+        #for the start, current is the head
+        current = head
+        while current:
+            next_distance = current.next
+            while next_distance and next_distance.val == current.val:
+                next_distance = next_distance.next
+            current.next = next_distance
+            current = next_distance
+        return head
